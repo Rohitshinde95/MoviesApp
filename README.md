@@ -1,2 +1,3 @@
 # MoviesApp
-An Android application for displaying movie list
+An Android application which displays the latest and top rated movies fetched from MoviesDB
+https://developers.themoviedb.org/
