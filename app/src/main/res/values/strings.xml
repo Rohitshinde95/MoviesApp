@@ -6,7 +6,7 @@
 
     <string name="movie_synopsis">Overview</string>
     <string name="movie_release_date">Release Date</string>
-    <string name="movie_vote_average">Vote Average</string>
+    <string name="movie_vote_average">User Rating</string>
     <string name="intent_movie">movie</string>
     <string name="load_movies_message">Loading Movies</string>
     <string name="server_error_message">Server not available</string>
@@ -17,7 +17,7 @@
     <string name="key_movie_original_title">original_title</string>
     <string name="key_movie_release_date">release_date</string>
     <string name="key_movie_poster_path">poster_path</string>
-    <string name="key_movie_vote_count">vote_count</string>
+    <string name="key_movie_vote_average">vote_average</string>
     <string name="key_movie_overview">overview</string>
 
     <string name="key_error">error</string>

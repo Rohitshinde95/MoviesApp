@@ -153,7 +153,7 @@ public class MoviesList extends AppCompatActivity {
                         String releaseDate = movieJSONObject.getString(getResources().getString(R.string.key_movie_release_date));
                         String moviePoster = movieJSONObject.getString(getResources().getString(R.string.key_movie_poster_path));
                         moviePoster = getResources().getString(R.string.image_base_url) + imageType + moviePoster;
-                        String voteAverage = movieJSONObject.getString(getResources().getString(R.string.key_movie_vote_count));
+                        String voteAverage = movieJSONObject.getString(getResources().getString(R.string.key_movie_vote_average));
                         String plotSynopsis = movieJSONObject.getString(getResources().getString(R.string.key_movie_overview));
                         MovieBean movieBean = new MovieBean(title, releaseDate, moviePoster, voteAverage, plotSynopsis);
                         movieBeanArrayList.add(movieBean);
