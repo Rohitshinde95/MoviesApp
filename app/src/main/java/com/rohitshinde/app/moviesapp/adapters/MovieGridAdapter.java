@@ -1,51 +1,36 @@
 package com.rohitshinde.app.moviesapp.adapters;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rohitshinde.app.moviesapp.R;
-import com.squareup.picasso.Callback;
+import com.rohitshinde.app.moviesapp.bean.MovieBean;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<String> images = new ArrayList<>();
-    private Context context;
+    private final List<MovieBean> movieBeanList;
+
     private OnItemClickListener mOnItemClickListener;
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, String obj, int position);
+    public MovieGridAdapter(List<MovieBean> movieBeanList) {
+        this.movieBeanList = movieBeanList;
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = mItemClickListener;
     }
 
-    public MovieGridAdapter(Context context, List<String> images) {
-        this.images = images;
-        this.context = context;
-    }
-
-    public class OriginalViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
-
-        public OriginalViewHolder(View v) {
-            super(v);
-            image = v.findViewById(R.id.image);
-        }
-    }
-
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_grid_image, parent, false);
         vh = new OriginalViewHolder(v);
@@ -53,29 +38,20 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OriginalViewHolder) {
             final OriginalViewHolder view = (OriginalViewHolder) holder;
-            String imagePath=images.get(position);
-            Log.e("TAG", "Loaded Path=" + imagePath);
+            final String imagePath = movieBeanList.get(position).getMoviePoster();
             Picasso.get()
                     .load(imagePath)
-                    .error(R.mipmap.ic_no_image_available)
-                    .into(view.image, new Callback() {
-                @Override
-                public void onSuccess() {
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    Log.e("","Error");
-                }
-            });
+                    .error(R.drawable.image_not_available)
+                    .into(view.image);
 
             view.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(movieBeanList.get(position));
                     }
                 }
             });
@@ -84,7 +60,20 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return images.size();
+        return movieBeanList.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(MovieBean obj);
+    }
+
+    private class OriginalViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView image;
+
+        private OriginalViewHolder(View v) {
+            super(v);
+            image = v.findViewById(R.id.image);
+        }
     }
 
 }

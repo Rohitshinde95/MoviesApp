@@ -1,11 +1,13 @@
 package com.rohitshinde.app.moviesapp.bean;
 
-public class MovieBean {
-    private String title;
-    private String releaseDate;
-    private String moviePoster;
-    private String voteAverage;
-    private String plotSynopsis;
+import java.io.Serializable;
+
+public class MovieBean implements Serializable {
+    private final String title;
+    private final String releaseDate;
+    private final String moviePoster;
+    private final String voteAverage;
+    private final String plotSynopsis;
 
     public MovieBean(String title, String releaseDate, String moviePoster, String voteAverage, String plotSynopsis) {
         this.title = title;
@@ -19,39 +21,20 @@ public class MovieBean {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
     public String getMoviePoster() {
         return moviePoster;
     }
 
-    public void setMoviePoster(String moviePoster) {
-        this.moviePoster = moviePoster;
-    }
-
     public String getVoteAverage() {
         return voteAverage;
-    }
-
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
     }
 
     public String getPlotSynopsis() {
         return plotSynopsis;
     }
 
-    public void setPlotSynopsis(String plotSynopsis) {
-        this.plotSynopsis = plotSynopsis;
-    }
 }
